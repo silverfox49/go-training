@@ -9,10 +9,10 @@ repos:
 #     -   id: check-yaml
 #     -   id: check-added-large-files
 
--   repo: local
-    hooks:
-      - id: check-branch-name
-        name: "Check branch name for Jira ID"
-        entry: githooks-bare/hooks/pre-commit
-        language: script
-        stages: [pre-commit, pre-push]
+- repo: local
+  hooks:
+    - id: check-branch-name
+      name: "Check branch name for Jira ID"
+      entry: githooks-bare/hooks/check-branch-name.sh
+      language: script
+      stages: [pre-commit, pre-push]
