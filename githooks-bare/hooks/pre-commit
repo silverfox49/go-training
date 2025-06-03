@@ -1,0 +1,18 @@
+#!/bin/bash
+
+while read oldrev newrev refname; do
+    branch=$(echo $refname | sed 's/refs\/heads\///')
+    if [[ ! "$branch" =~ SRE-[0-9]+ ]]; then
+        echo "❌ Push rejected. Branch name must include a Jira ID (e.g., SRE-123)"
+        exit 1
+    fi
+done
+echo "✅ Branch name is valid. Proceeding with commit."
+# This script checks if the branch name contains a Jira ID in the format SRE-123.
+# If the branch name does not match, it rejects the commit with an error message.
+# If the branch name is valid, it allows the commit to proceed.
+# Usage: Place this script in the .git/hooks directory of your bare repository.
+# Make sure to give it execute permissions: chmod +x pre-commit
+# Note: This script is intended for use in a bare repository's hooks directory.
+# It reads the old and new revisions and the reference name from standard input.
+# It checks the branch name against a regex pattern for Jira IDs.
